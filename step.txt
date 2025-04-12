@@ -1,0 +1,31 @@
+Étape 1 : Configuration de l'authentification avec Django
+
+    Création du superuser : Utilise la commande python manage.py createsuperuser pour te créer un compte administrateur avec tous les droits.
+
+    Utiliser Django's User Model : Django gère l'authentification utilisateur via son modèle User. Tu peux l'utiliser pour les auteurs de ton blog. Si tu souhaites personnaliser ce modèle, tu pourrais créer un modèle utilisateur personnalisé.
+
+    Installation et configuration de rest_framework.authtoken pour gérer l'authentification avec un token. Ajoute-le à ton INSTALLED_APPS dans settings.py 
+    Ensuite, migre la base de données pour créer les tables associées 
+
+
+Étape 2 : Authentification et permissions dans Django REST Framework
+
+    Configuration de l'authentification par token : Modifie ton fichier settings.py pour activer l'authentification par token dans REST_FRAMEWORK 
+    Création de l'endpoint pour obtenir un token : Ajoute l'endpoint pour que les utilisateurs puissent obtenir un token après s'être authentifiés. 
+
+
+Étape 3 : Définir les permissions pour les articles
+
+    Pour que chaque auteur puisse uniquement créer, modifier ou supprimer ses propres articles, et que toi (en tant que superuser) tu puisses tout gérer, voici les permissions que tu peux définir.
+    Créer une permission personnalisée : Tu vas créer une permission qui permet de restreindre l’accès en fonction du propriétaire de l’article et de son statut d'administrateur. Crée un fichier permissions.py dans ton application si ce n'est pas déjà fait.
+    Appliquer la permission dans tes vues : Dans ton fichier views.py, applique cette permission dans les vues liées aux articles. 
+
+Étape 4 : Lier les articles aux utilisateurs
+
+Dans ton modèle Article, lier l’article à l’utilisateur authentifié (request.user).
+
+    Modifie la méthode .create() dans ton sérialiseur pour associer l’auteur de l’article à l’utilisateur connecté (l'auteur authentifié) automatiquement 
+
+Étape 5 : Gestion des droits d'accès dans l'interface d'administration
+
+Dans l'interface Django admin, en tant que superuser, tu pourras gérer les utilisateurs, leurs permissions, et visualiser/modifier tous les articles.
